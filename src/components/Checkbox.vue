@@ -36,9 +36,9 @@ export default {
 .checkmark::after {
     content: "";
     position: absolute;
-    right: 0.2em;
-    width: 0.25em;
-    height: 0.5em;
+    right: 0.18em;
+    width: 0.23em;
+    height: 0.40em;
     border-bottom: 2px solid #fff;
     border-right: 2px solid #fff;
     transform: rotate(45deg);

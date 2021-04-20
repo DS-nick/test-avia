@@ -69,7 +69,7 @@ export default {
     background-color: #F5F5F5;
     border-radius: 4px;
     padding: 0.75em;
-    padding-right: 0;
+    padding-right: 4px;
     height: 20em;
     position: relative;
     overflow-y: hidden;
@@ -79,13 +79,21 @@ export default {
     overflow-y: auto;
     height: 80%;
 }
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey; 
-  border-radius: 10px;
+
+.filter-list_carriers::-webkit-scrollbar-track {
+    display: none;
 }
-::-webkit-scrollbar-thumb {
-  background: red; 
-  border-radius: 10px;
+
+.filter-list_carriers::-webkit-scrollbar {
+  width: 2px;
+  background-color: #F5F5F5;
+}
+
+.filter-list_carriers::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: #E1E1E1;
 }
 .filter-item {
     display: flex;
