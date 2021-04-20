@@ -26,5 +26,9 @@ export default {
 .tickets {
     list-style: none;
     flex: 1 1;
+    margin-left: 1.75em;
+}
+.ticket-item {
+    margin-bottom: 0.75em;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div class="main_screen">
-        <Filters />
+        <Filters :airlines="searchResult.airlines" />
         <TicketList :flights="searchResult.flights" />
     </div>
 </template>
@@ -27,8 +27,9 @@ export default {
 .main_screen {
     width: 80%;
     height: 100vh;
-    background: yellow;
+    background-color: #D7D7D7;;
     margin: 0 auto;
+    padding: 5em 0;
     display: flex;
     
 }
