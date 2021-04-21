@@ -1,7 +1,7 @@
 <template>
     <div class="main_screen">
-        <Filters :airlines="searchResult.airlines" />
-        <TicketList :flights="searchResult.flights" />
+        <Filters @clicked="filterAirlines" :airlines="searchResult.airlines" />
+        <TicketList :flights="filteredResult.flights" />
     </div>
 </template>
 <script>
@@ -15,11 +15,23 @@ export default {
     },
     data() {
         return {
-            searchResult: json
+            searchResult: json,
+            filteredResult: []
+        }
+    },
+    methods: {
+        filterAirlines(filters) {
+           this.filteredResult = JSON.parse(JSON.stringify(this.searchResult))
+            if(filters.length > 0) {
+             this.filteredResult.flights = this.filteredResult.flights.filter(flight=> filters.includes(flight.itineraries[0][0].carrier))
+            }else {
+                this.filteredResult.flights = []
+            }
+            
         }
     },
     created() {
-        console.log(this.searchResult)
+        this.filteredResult = JSON.parse(JSON.stringify(this.searchResult))
     }
 }
 </script>

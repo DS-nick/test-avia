@@ -9,11 +9,11 @@
                 </div>
                 <div class="filter-item">
                     <Checkbox id="2" />
-                    <span class="filter-item_text">Только прямые</span>
+                    <span class="filter-item_text">Только с багажом</span>
                 </div>
                 <div class="filter-item">
-                    <Checkbox id="3"/>
-                    <span class="filter-item_text">Только прямые</span>
+                    <Checkbox id="refundable"/>
+                    <span class="filter-item_text">Только возвратные</span>
                 </div>
             </div>
         </div>
@@ -21,17 +21,18 @@
             <div class="filter-title">Авиакомпании</div>
             <div class="filter-carriers_all">
                 <div class="filter-item">
-                    <Checkbox id="airline-all"/>
+                    <Checkbox @clicked="selectAll" id="airline-all" :checked="checked" />
                     <span class="filter-item_text">Все</span>
                 </div>
             </div>
             <div class="filter-list_carriers" >
                 <div class="filter-item" v-for="(airline, index) in airlines" :key="index">
-                    <Checkbox :id="index"/>
+                    <Checkbox @clicked="addFilter" :id="index" :checked="checked" />
                     <span class="filter-item_text">{{ airline }}</span>
                 </div>
             </div>
         </div>
+        <div class="reset-filters">Сбросить все фильтры</div>
     </div>
 </template>
 <script>
@@ -45,6 +46,37 @@ export default {
     },
     components: {
         Checkbox
+    },
+    data() {
+        return {
+            filters: [],
+            checked: false
+        }
+    },
+    methods: {
+        addFilter(value, isAddFilter) {
+            
+            if(isAddFilter) {
+                this.filters.push(value)
+            }else {
+                this.filters = this.filters.filter(item=> item !== value)
+            }
+            this.$emit('clicked', this.filters)
+        },
+        selectAll(value, isAddFilter) {
+            this.checked = !this.checked
+            if(isAddFilter) {
+                 this.filters = Object.keys(this.airlines)
+                 
+            }else {
+                this.filters = []
+            }
+            this.$emit('clicked', this.filters)
+           
+        },
+    },
+    created() {
+        this.selectAll("airline-all", true)
     }
     
 }
@@ -80,9 +112,6 @@ export default {
     height: 80%;
 }
 
-.filter-list_carriers::-webkit-scrollbar-track {
-    display: none;
-}
 
 .filter-list_carriers::-webkit-scrollbar {
   width: 2px;
@@ -94,14 +123,24 @@ export default {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
   box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
   background-color: #E1E1E1;
+  cursor: pointer;
 }
 .filter-item {
     display: flex;
     line-height: 1em;
     padding: 0.5em 0;
 }
+.filter-item:hover {
+    cursor: pointer;
+}
 .filter-item_text {
     margin-left: 0.75em;
+}
+.reset-filters {
+    color: #7284E4;
+    display: inline-block;
+    border-bottom: 1px dashed #7284E4;
+    margin-top: 0.75em;
 }
 
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div class="checkbox">
-        <input type="checkbox" name="" class="checkbox-input" :id="id"
-                v-on:change="onChange"
+        <input type="checkbox" name="" class="checkbox-input" :checked="!checked"  :id="id"
+                v-on:change="onChange($event, id)"
         >
         <label :for="id" class="checkmark"></label>
     </div>
@@ -11,11 +11,14 @@ export default {
     props: {
         id: {
             type: String
-        }
+        }, 
+       checked: {
+           type: Boolean
+       }
     },
     methods: {
-        onChange() {
-            console.log('input change')
+        onChange({target}, id) {
+            this.$emit('clicked', id, !target.checked)
         }
     }
 }
@@ -36,7 +39,7 @@ export default {
 .checkmark::after {
     content: "";
     position: absolute;
-    right: 0.18em;
+    right: 0.2em;
     width: 0.23em;
     height: 0.40em;
     border-bottom: 2px solid #fff;

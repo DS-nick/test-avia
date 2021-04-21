@@ -1,9 +1,9 @@
 <template>
-    <ul class="tickets">
+    <transition-group name="list" tag="ul" class="tickets">
         <li class="ticket-item" v-for="flight in flights" :key="flight.id" >
             <Ticket :flight="flight" />
         </li>
-    </ul>
+    </transition-group>
 </template>
 <script>
 import Ticket from './Ticket'
@@ -17,9 +17,6 @@ export default {
     components: {
         Ticket
     },
-    created() {
-        console.log('**', this.flights)
-    }
 }
 </script>
 <style scoped>
@@ -30,5 +27,15 @@ export default {
 }
 .ticket-item {
     margin-bottom: 0.75em;
+}
+.list-enter {
+    opacity: 0;
+    transform: translateX(30px);
+}
+.list-leave-to {
+    transform: translateX(30px);
+}
+.ticket-item {
+    transition: all 1s;
 }
 </style>
